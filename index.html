@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Le Chemin — Carte de voyage interactive</title>
+
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div id="app">
+
+  <aside id="sidebar">
+    <header class="sidebar-header">
+      <h1>🧭 Le Chemin</h1>
+      <p class="subtitle">Ma carte de voyage</p>
+    </header>
+
+    <div class="search-box">
+      <input type="text" id="city-search" placeholder="Rechercher une ville (ex: Hanoï)…" autocomplete="off" />
+      <ul id="search-results" class="search-results hidden"></ul>
+    </div>
+
+    <p class="hint">Astuce : cliquez directement sur la carte pour ajouter une étape à cet endroit précis.</p>
+
+    <div class="toolbar">
+      <button id="btn-toggle-path" class="btn" title="Afficher/masquer le tracé du voyage">🧵 Chemin</button>
+      <button id="btn-export" class="btn" title="Exporter mes étapes en JSON">⬇️ Export</button>
+      <button id="btn-import" class="btn" title="Importer un fichier JSON">⬆️ Import</button>
+      <button id="btn-clear" class="btn btn-danger" title="Supprimer toutes les étapes">🗑️ Vider</button>
+    </div>
+    <input type="file" id="import-file" accept="application/json" class="hidden" />
+
+    <div class="stages-header">
+      <span id="stage-count">0 étape</span>
+    </div>
+    <ol id="stage-list" class="stage-list"></ol>
+  </aside>
+
+  <main id="map"></main>
+
+</div>
+
+<!-- Modale d'ajout / édition d'étape -->
+<div id="modal-overlay" class="modal-overlay hidden">
+  <div class="modal">
+    <h2 id="modal-title">Ajouter une étape</h2>
+    <form id="stage-form">
+      <label>
+        Ville
+        <input type="text" id="field-city" required placeholder="ex: Chiang Mai" />
+      </label>
+      <label>
+        Pays
+        <select id="field-country" required></select>
+      </label>
+      <label>
+        Date de passage
+        <input type="date" id="field-date" />
+      </label>
+      <label>
+        Note / souvenir
+        <textarea id="field-note" rows="3" placeholder="Un souvenir, une anecdote…"></textarea>
+      </label>
+      <label>
+        Photo (URL, optionnel)
+        <input type="url" id="field-photo" placeholder="https://…" />
+      </label>
+      <div class="modal-actions">
+        <button type="button" id="btn-delete-stage" class="btn btn-danger hidden">Supprimer</button>
+        <div class="modal-actions-right">
+          <button type="button" id="btn-cancel" class="btn">Annuler</button>
+          <button type="submit" class="btn btn-primary">Enregistrer</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="vendor/leaflet/leaflet.js"></script>
+<script src="js/countries.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
